@@ -69,11 +69,47 @@ var animateButton = function(e) {
         
         var tooltip = document.getElementById("myTooltip");
         tooltip.innerHTML = "Copied: " + copyText.value;
+         document.button
       }
       
       function outFunc() {
         var tooltip = document.getElementById("myTooltip");
         tooltip.innerHTML = "Copy to clipboard";
       }
+      var qrcode = document.getElementById('imgqr')
+      var qrtext = document.getElementById('myInput');
+      var buttonQR = document.getElementById('btnqr');
+      buttonQR.addEventListener('click', generateQR);
+      function generateQR(){
+        var size = "200x200";
+        var data = qrtext.value;
+        var baseURL = "https://api.qrserver.com/v1/create-qr-code/";
 
-      
+        var url = `${baseURL}?size=${size}&data=${data}`;
+
+        qrcode.src = url;
+        console.log(url)
+
+      }
+
+      // var btndownload = document.getElementById('btndownload');
+      // btndownload.addEventListener('click', () => {
+      //   var imgPath = img.getAttribute('src');
+      //   var fileName = getFileName(imgPath);
+
+      //   saveAs(imgPath, fileName);
+      // });
+
+      // function getFileName(str){
+      //   return str.substring(str.lasIndexOf('/')+1);
+      // }
+      var btnDownload = document.querySelector('.btndownload');
+      var img = document.querySelector('img');
+      btnDownload.addEventListener('click', () => {
+        var imagePath = img.getAttribute('src');
+        var fileName = getFileName(imagePath);
+          saveAs(imagePath, fileName);
+      });
+      function getFileName(str) {
+          return str.substring(str.lastIndexOf('/') + 1)
+      }
